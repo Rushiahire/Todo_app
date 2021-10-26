@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="signup" method="POST">
+    {% csrf_token %}
+
+    {{signup_form}}
+    <button>Sign in</button>
+</form>
+
+{% endblock %}

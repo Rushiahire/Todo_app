@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>HomePage</h1>
+<h2>
+    Welcome {{request.user.username}}🎈🎊
+</h2>
+
+
+{% if request.user.is_authenticated %}
+<form action="/new_task" method="post">
+{% csrf_token %}
+
+{{task_form}}
+<button type="submit">
+    Add Task
+</button>
+</form>
+
+<ul>
+    {% for task in todo_list %}
+        <li>
+            <form action="/delete" method="post">
+                {% csrf_token %}
+                {{task}}
+                <input type="hidden" name="task" value={{task}} >
+                <button type="submit"> X </button>
+            </form>
+        </li>
+    {% endfor %}
+
+</ul>
+{% endif %}
+
+
+{% endblock %}
